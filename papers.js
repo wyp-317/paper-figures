@@ -33,16 +33,26 @@ const papers = [
     "title": "Cycle-Consistent Tuning for Layered Image Decomposition",
     "conference": "CVPR",
     "year": 2026,
-    "category": "方法流程图",
-    "image": "layered-decomposition",
-    "figure": 2,
     "authors": "Gu et al.",
     "abstract": "论文用扩散模型把真实图像中的标志和物体表面分离。方法联合训练分解与重组，让两条路径互相约束，并通过生成样本迭代补充训练数据。",
-    "figureNote": "流程图把数据准备、图层分离和结果展示并排组织。相同案例跨阶段复用，使读者能追踪标志和底层物体分别发生了什么变化。",
     "source": "https://arxiv.org/abs/2602.20989",
     "pdf": "https://arxiv.org/pdf/2602.20989",
     "license": "by",
-    "proceedings": "https://openaccess.thecvf.com/content/CVPR2026/html/Gu_Cycle-Consistent_Tuning_for_Layered_Image_Decomposition_CVPR_2026_paper.html"
+    "proceedings": "https://openaccess.thecvf.com/content/CVPR2026/html/Gu_Cycle-Consistent_Tuning_for_Layered_Image_Decomposition_CVPR_2026_paper.html",
+    "figures": [
+      {
+        "category": "方法流程图",
+        "image": "layered-decomposition",
+        "figure": 2,
+        "figureNote": "流程图把数据准备、图层分离和结果展示并排组织。相同案例跨阶段复用，使读者能追踪标志和底层物体分别发生了什么变化。"
+      },
+      {
+        "category": "任务示意图",
+        "image": "layered-decomposition-fig1",
+        "figure": 1,
+        "figureNote": "每组用两张带标志的物体照片示范先拆分、再交叉重组。固定各列的输入和输出角色，可让读者一眼分辨哪一层是标志，哪一层是物体表面。"
+      }
+    ]
   },
   {
     "title": "SPDMark: Selective Parameter Displacement for Robust Video Watermarking",
@@ -183,16 +193,26 @@ const papers = [
     "title": "Let’s Think with Images Efficiently! An Interleaved-Modal Chain-of-Thought Reasoning Framework with Dynamic and Precise Visual Thoughts",
     "conference": "AAAI",
     "year": 2026,
-    "category": "任务示意图",
-    "image": "dap-icot",
-    "figure": 1,
     "authors": "Liu et al.",
     "abstract": "DaP-ICoT 让多模态模型根据当前推理需要决定何时引入视觉线索，并用更连贯的视觉表示辅助推理，减少不必要的视觉步骤。",
-    "figureNote": "同一个视觉问题分别交给固定插入视觉线索和按需插入的推理流程。两条路径上下对照，让读者看出视觉线索何时出现、怎样影响推理。",
     "source": "https://arxiv.org/abs/2603.21754v1",
     "pdf": "https://arxiv.org/pdf/2603.21754v1",
     "license": "by-nc-sa",
-    "proceedings": "https://ojs.aaai.org/index.php/AAAI/article/view/40494"
+    "proceedings": "https://ojs.aaai.org/index.php/AAAI/article/view/40494",
+    "figures": [
+      {
+        "category": "任务示意图",
+        "image": "dap-icot",
+        "figure": 1,
+        "figureNote": "同一个视觉问题分别交给固定插入视觉线索和按需插入的推理流程。两条路径上下对照，让读者看出视觉线索何时出现、怎样影响推理。"
+      },
+      {
+        "category": "方法流程图",
+        "image": "dap-icot-fig2",
+        "figure": 2,
+        "figureNote": "左侧展示模型如何在推理中判断是否需要视觉线索，右侧把视觉区域选择和后续推理接起来。读图时可跟着同一个问题，看模型何时插入图像信息。"
+      }
+    ]
   },
   {
     "title": "Expand Your SCOPE: Semantic Cognition over Potential-Based Exploration for Embodied Visual Navigation",
@@ -228,16 +248,26 @@ const papers = [
     "title": "Predicting Video Slot Attention Queries from Random Slot-Feature Pairs",
     "conference": "AAAI",
     "year": 2026,
-    "category": "模型架构图",
-    "image": "randsf-query",
-    "figure": 2,
     "authors": "Zhao et al.",
     "abstract": "论文研究如何在无监督视频建模中预测下一帧的对象槽查询。它利用随机槽位与图像特征配对训练查询预测器，让下一帧的特征参与查询生成。",
-    "figureNote": "左侧画出视频帧编码、槽注意力和预测器如何连接，右侧单独展开随机配对的训练过程。总图和局部训练图分开放，便于追踪两套信息流。",
     "source": "https://arxiv.org/abs/2508.01345v7",
     "pdf": "https://arxiv.org/pdf/2508.01345v7",
     "license": "by",
-    "proceedings": "https://ojs.aaai.org/index.php/AAAI/article/view/38322"
+    "proceedings": "https://ojs.aaai.org/index.php/AAAI/article/view/38322",
+    "figures": [
+      {
+        "category": "模型架构图",
+        "image": "randsf-query",
+        "figure": 2,
+        "figureNote": "左侧画出视频帧编码、槽注意力和预测器如何连接，右侧单独展开随机配对的训练过程。总图和局部训练图分开放，便于追踪两套信息流。"
+      },
+      {
+        "category": "定性结果对比图",
+        "image": "randsf-query-fig3",
+        "figure": 3,
+        "figureNote": "用同一视频的连续帧对齐 SlotContrast 和 RandSF.Q 的分割结果。沿时间方向追踪颜色区域，可以比较两个方法是否持续覆盖同一对象。"
+      }
+    ]
   },
   {
     "title": "MMSI-Bench: A Benchmark for Multi-Image Spatial Intelligence",
@@ -258,16 +288,26 @@ const papers = [
     "title": "Agent-X: Evaluating Deep Multimodal Reasoning in Vision-Centric Agentic Tasks",
     "conference": "ICLR",
     "year": 2026,
-    "category": "任务示意图",
-    "image": "agent-x",
-    "figure": 1,
     "authors": "Ashraf et al.",
     "abstract": "Agent-X 用真实图像、视频和交互环境中的任务考查视觉智能体。评估覆盖多步推理和工具使用，也记录中间步骤以检查完成过程。",
-    "figureNote": "图并排展示两组任务，每组把用户问题、观察画面和工具调用放在一起。逐步列出中间动作，让读者看到终点答案依赖哪些决策。",
     "source": "https://arxiv.org/abs/2505.24876v2",
     "pdf": "https://arxiv.org/pdf/2505.24876v2",
     "license": "by",
-    "proceedings": "https://iclr.cc/virtual/2026/poster/10009109"
+    "proceedings": "https://iclr.cc/virtual/2026/poster/10009109",
+    "figures": [
+      {
+        "category": "任务示意图",
+        "image": "agent-x",
+        "figure": 1,
+        "figureNote": "图并排展示两组任务，每组把用户问题、观察画面和工具调用放在一起。逐步列出中间动作，让读者看到终点答案依赖哪些决策。"
+      },
+      {
+        "category": "方法流程图",
+        "image": "agent-x-fig2",
+        "figure": 2,
+        "figureNote": "图从图像、视频和可用工具出发，依次展示初始问题生成、人工完善和逐步推理轨迹标注。各阶段保留对应的输入和输出，便于追踪一条评测样本怎样形成。"
+      }
+    ]
   },
   {
     "title": "Constructive Distortion: Improving MLLMs with Attention-Guided Image Warping",
@@ -318,46 +358,76 @@ const papers = [
     "title": "Pygmalion Effect in Vision: Image-to-Clay Translation for Reflective Geometry Reconstruction",
     "conference": "NeurIPS",
     "year": 2026,
-    "category": "任务示意图",
-    "image": "pygmalion-vision",
-    "figure": 1,
     "authors": "Lee et al.",
     "abstract": "论文研究反光表面的三维重建。作者把多视角照片转换成保留形状的黏土风格图像，将其作为去除反光干扰的几何监督，并与反射建模分支共享三维表示。",
-    "figureNote": "图由反光原图、去反光的黏土图和重建结果组成。把反光外观与目标几何放在相邻列，能直观看出镜面高光为何会干扰形状恢复。",
     "source": "https://arxiv.org/abs/2511.21098v2",
     "pdf": "https://arxiv.org/pdf/2511.21098v2",
     "license": "by",
-    "proceedings": "https://neurips.cc/virtual/2026/poster/150623"
+    "proceedings": "https://neurips.cc/virtual/2026/poster/150623",
+    "figures": [
+      {
+        "category": "任务示意图",
+        "image": "pygmalion-vision",
+        "figure": 1,
+        "figureNote": "图由反光原图、去反光的黏土图和重建结果组成。把反光外观与目标几何放在相邻列，能直观看出镜面高光为何会干扰形状恢复。"
+      },
+      {
+        "category": "模型架构图",
+        "image": "pygmalion-vision-fig2",
+        "figure": 2,
+        "figureNote": "上路用去反光的黏土图提供几何监督，下路模拟反射外观。把两路共用的高斯几何放在分叉之前，可以看出外观和几何怎样在同一个模型里联合学习。"
+      }
+    ]
   },
   {
     "title": "Rethinking Geometric Depth in Monocular 3D Object Detection: A Projection-Consistent Reformulation",
     "conference": "NeurIPS",
     "year": 2026,
-    "category": "模型架构图",
-    "image": "monopca",
-    "figure": 3,
     "authors": "Zhang et al.",
     "abstract": "MonoPCA 研究单目三维检测中的深度偏差。传统的二维框高公式容易估到物体可见前表面的深度，作者加入与朝向相关的几何校正来估计物体中心。",
-    "figureNote": "图从输入图像和特征骨干开始，连接二维框、尺寸和朝向等预测分支，再汇入投影校正模块。各分支的输出对应明确的几何量。",
     "source": "https://arxiv.org/abs/2611.11607v1",
     "pdf": "https://arxiv.org/pdf/2611.11607v1",
     "license": "by",
-    "proceedings": "https://neurips.cc/virtual/2026/poster/152569"
+    "proceedings": "https://neurips.cc/virtual/2026/poster/152569",
+    "figures": [
+      {
+        "category": "模型架构图",
+        "image": "monopca",
+        "figure": 3,
+        "figureNote": "图从输入图像和特征骨干开始，连接二维框、尺寸和朝向等预测分支，再汇入投影校正模块。各分支的输出对应明确的几何量。"
+      },
+      {
+        "category": "任务示意图",
+        "image": "monopca-fig2",
+        "figure": 2,
+        "figureNote": "图把相机、可见前表面和物体中心画在同一投影几何里。对照不同深度定义，可以看出用二维框高反推距离时，为什么容易把物体中心估得过近。"
+      }
+    ]
   },
   {
     "title": "Virtual Task Prompting for Multi-Task Scene Understanding",
     "conference": "NeurIPS",
     "year": 2026,
-    "category": "方法流程图",
-    "image": "virtual-task-prompting",
-    "figure": 1,
     "authors": "Wang et al.",
     "abstract": "VTP 用共享的虚拟任务状态支持多种场景理解任务。每层通过可学习的路由读取任务相关组合，与图像特征交互后再写回共享状态。",
-    "figureNote": "图并列展示基线和 VTP 的处理流程。沿 VTP 一栏阅读，可以追踪虚拟任务状态如何在每层被读取、处理并写回。",
     "source": "https://arxiv.org/abs/2611.11041v1",
     "pdf": "https://arxiv.org/pdf/2611.11041v1",
     "license": "by",
-    "proceedings": "https://neurips.cc/virtual/2026/poster/154323"
+    "proceedings": "https://neurips.cc/virtual/2026/poster/154323",
+    "figures": [
+      {
+        "category": "方法流程图",
+        "image": "virtual-task-prompting",
+        "figure": 1,
+        "figureNote": "图并列展示基线和 VTP 的处理流程。沿 VTP 一栏阅读，可以追踪虚拟任务状态如何在每层被读取、处理并写回。"
+      },
+      {
+        "category": "定性结果对比图",
+        "image": "virtual-task-prompting-fig2",
+        "figure": 2,
+        "figureNote": "列方向固定不同的场景理解任务，行方向对齐各方法与参考标注。横向能看任务覆盖，纵向能检查分割边界、显著区域等细节的差别。"
+      }
+    ]
   },
   {
     "title": "ORCA: Hunting Compositional Failures in Text-to-Image Diffusion",
@@ -448,31 +518,51 @@ const papers = [
     "title": "Step-Calibrated Diffusion for Biomedical Optical Image Restoration",
     "conference": "AAAI",
     "year": 2025,
-    "category": "方法流程图",
     "abstract": "生物医学光学图像难以获得成对的低质量与高质量样本。RSCD 用无需配对数据的扩散模型做图像修复，并动态估计还需去噪多少步。作者在图像质量指标和专家盲评中报告了改善。",
-    "figureNote": "沿时间轴看图，从左侧噪声到右侧修复结果。上方两条箭头分别标出初次估计和中途重新校准，颜色带区分了扩散生成与校准修复两个阶段。",
-    "image": "rscd",
-    "figure": 2,
     "authors": "Lyu et al.",
     "source": "https://arxiv.org/abs/2403.13680",
     "pdf": "https://arxiv.org/pdf/2403.13680",
     "license": "by-nc-sa",
-    "proceedings": "https://ojs.aaai.org/index.php/AAAI/article/view/32635"
+    "proceedings": "https://ojs.aaai.org/index.php/AAAI/article/view/32635",
+    "figures": [
+      {
+        "category": "方法流程图",
+        "image": "rscd",
+        "figure": 2,
+        "figureNote": "沿时间轴看图，从左侧噪声到右侧修复结果。上方两条箭头分别标出初次估计和中途重新校准，颜色带区分了扩散生成与校准修复两个阶段。"
+      },
+      {
+        "category": "任务示意图",
+        "image": "rscd-fig1",
+        "figure": 1,
+        "figureNote": "每行左边给出一块低质量组织图像，右边给出对应的修复结果。连续展示不同退化场景，可以快速说明任务输入的多样性以及期望恢复的组织细节。"
+      }
+    ]
   },
   {
     "title": "ViewSRD: 3D Visual Grounding via Structured Multi-View Decomposition",
     "conference": "ICCV",
     "year": 2025,
-    "category": "任务示意图",
-    "image": "viewsrd",
-    "figure": 1,
     "authors": "Huang et al.",
     "abstract": "ViewSRD 把包含多个参照物的三维定位描述拆成更简单的关系语句，并结合多个视角的信息，减少视角变化带来的空间关系歧义。",
-    "figureNote": "上半部分用室内场景解释多参照物和视角变化为何容易造成误定位，下半部分用分解后的关系与视角展示如何描述目标。",
     "source": "https://arxiv.org/abs/2507.11261",
     "pdf": "https://arxiv.org/pdf/2507.11261",
     "license": "by",
-    "proceedings": "https://openaccess.thecvf.com/content/ICCV2025/html/Huang_ViewSRD_3D_Visual_Grounding_via_Structured_Multi-View_Decomposition_ICCV_2025_paper.html"
+    "proceedings": "https://openaccess.thecvf.com/content/ICCV2025/html/Huang_ViewSRD_3D_Visual_Grounding_via_Structured_Multi-View_Decomposition_ICCV_2025_paper.html",
+    "figures": [
+      {
+        "category": "任务示意图",
+        "image": "viewsrd",
+        "figure": 1,
+        "figureNote": "上半部分用室内场景解释多参照物和视角变化为何容易造成误定位，下半部分用分解后的关系与视角展示如何描述目标。"
+      },
+      {
+        "category": "方法流程图",
+        "image": "viewsrd-fig2",
+        "figure": 2,
+        "figureNote": "先把包含多个参照物的问题拆成单参照物描述，再分别编码文字和多视角场景。沿箭头可追踪两路信息在跨视角模块里怎样汇合，最终定位三维目标。"
+      }
+    ]
   },
   {
     "title": "VRBench: A Benchmark for Multi-Step Reasoning in Long Narrative Videos",
@@ -493,16 +583,26 @@ const papers = [
     "title": "Bokehlicious: Photorealistic Bokeh Rendering with Controllable Apertures",
     "conference": "ICCV",
     "year": 2025,
-    "category": "任务示意图",
-    "image": "bokehlicious",
-    "figure": 3,
     "authors": "Seizinger et al.",
     "abstract": "Bokehlicious 用可感知光圈的注意力模块控制散景强度。作者采集 RealBokeh 数据，训练模型从普通图像直接生成不同光圈条件下的背景虚化。",
-    "figureNote": "每行用同一场景展示从小光圈输入到不同大光圈参考图，列顶标注 f 值。视角和主体保持一致，读者可以集中观察虚化强度与散景形状的变化。",
     "source": "https://arxiv.org/abs/2503.16067",
     "pdf": "https://arxiv.org/pdf/2503.16067",
     "license": "by-nc-sa",
-    "proceedings": "https://openaccess.thecvf.com/content/ICCV2025/html/Seizinger_Bokehlicious_Photorealistic_Bokeh_Rendering_with_Controllable_Apertures_ICCV_2025_paper.html"
+    "proceedings": "https://openaccess.thecvf.com/content/ICCV2025/html/Seizinger_Bokehlicious_Photorealistic_Bokeh_Rendering_with_Controllable_Apertures_ICCV_2025_paper.html",
+    "figures": [
+      {
+        "category": "任务示意图",
+        "image": "bokehlicious",
+        "figure": 3,
+        "figureNote": "每行用同一场景展示从小光圈输入到不同大光圈参考图，列顶标注 f 值。视角和主体保持一致，读者可以集中观察虚化强度与散景形状的变化。"
+      },
+      {
+        "category": "模型架构图",
+        "image": "bokehlicious-fig4",
+        "figure": 4,
+        "figureNote": "图把输入图像和目标光圈值画成两路。光圈条件调节中间的注意力模块，图像特征经编码和解码后生成目标虚化效果。"
+      }
+    ]
   },
   {
     "title": "HUG: Hierarchical Urban Gaussian Splatting with Block-Based Reconstruction for Large-Scale Aerial Scenes",
