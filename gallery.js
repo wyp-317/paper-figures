@@ -36,7 +36,16 @@ function populateFilter(input, entries, compare) {
 for (const { field, input, compare } of paperFilters) {
   populateFilter(input, catalog.map(paper => paper[field]), compare);
 }
-populateFilter(categoryFilter, catalog.flatMap(paper => paper.figures.map(figure => figure.category)));
+const categoryTotals = new Map();
+for (const { figures } of catalog) {
+  for (const { category } of figures) {
+    categoryTotals.set(category, (categoryTotals.get(category) ?? 0) + 1);
+  }
+}
+for (const [category, total] of categoryTotals) {
+  categoryFilter.add(new Option(category + "（" + total + " 张）", category));
+}
+categoryFilter.addEventListener("change", render);
 
 function loadThumbnail(image) {
   image.src = image.dataset.thumbnail;
@@ -57,13 +66,14 @@ function createCard({ paper, figures, selectedFigure }, index) {
   const buttons = [];
 
   function showFigure(figure) {
+    const label = figure.label ?? "图 " + figure.figure;
     image.dataset.thumbnail = "figures/" + figure.image + "-small.webp";
-    image.alt = figure.category + "，论文图 " + figure.figure;
+    image.alt = figure.category + "，" + label;
     if (image.hasAttribute("src")) loadThumbnail(image);
     category.textContent = figure.category;
     note.textContent = figure.figureNote;
     source.href = figure.source ?? paper.source;
-    source.textContent = paper.authors + " · 图 " + figure.figure + "（裁切自论文）";
+    source.textContent = paper.authors + " · " + (figure.label ?? label + "（裁切自论文）");
     const licenseCode = figure.license ?? paper.license;
     license.href = "https://creativecommons.org/licenses/" + licenseCode + "/4.0/";
     license.textContent = "CC " + licenseCode.toUpperCase() + " 4.0";
@@ -76,7 +86,7 @@ function createCard({ paper, figures, selectedFigure }, index) {
     for (const figure of figures) {
       const button = document.createElement("button");
       button.type = "button";
-      button.textContent = "图 " + figure.figure + " · " + figure.category;
+      button.textContent = (figure.label ?? "图 " + figure.figure) + " · " + figure.category;
       button.addEventListener("click", () => showFigure(figure));
       buttons.push([figure, button]);
       controls.append(button);
@@ -115,9 +125,8 @@ function render() {
     if (selectedFigure) matches.push({ paper, figures, selectedFigure });
   }
   reset.disabled = !search.value && !category && activeFilters.length === 0;
-  count.textContent = matches.length === papers.length
-    ? papers.length + " 篇论文"
-    : matches.length + " / " + papers.length + " 篇论文";
+  const figureCount = matches.reduce((total, match) => total + match.figures.length, 0);
+  count.textContent = matches.length + " 篇论文 · " + figureCount + " 张图";
   thumbnailObserver?.disconnect();
   grid.replaceChildren(...matches.map(createCard));
   if (!matches.length) {
