@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="从计算机视觉顶会论文的原图中寻找科研绘图参考。">
+  <title>论文图鉴 · 计算机视觉绘图参考</title>
+  <link rel="stylesheet" href="style.css?v=2">
+  <script src="papers.js" defer></script>
+  <script src="gallery.js?v=3" defer></script>
+</head>
+<body>
+  <header class="masthead wrap">
+    <a class="brand" href="./" aria-label="论文图鉴首页"><span class="brand-mark" aria-hidden="true">◧</span> 论文图鉴</a>
+    <a class="mast-link" href="#gallery">浏览论文 <span aria-hidden="true">↓</span></a>
+  </header>
+
+  <main class="wrap">
+    <section class="intro" aria-labelledby="title">
+      <h1 id="title">计算机视觉<span class="accent">.</span><br>论文图集</h1>
+      <p>2025–2026 年 CCF A 类会议论文原图。<br>点击图片或标题，在新标签页打开论文 PDF。</p>
+    </section>
+
+    <section id="gallery" aria-label="论文图集">
+      <div class="toolbar">
+        <div class="filters" role="group" aria-label="筛选论文">
+          <label class="filter" for="year-filter">年份
+            <select id="year-filter"><option value="">全部年份</option></select>
+          </label>
+          <label class="filter" for="conference-filter">会议
+            <select id="conference-filter"><option value="">全部会议</option></select>
+          </label>
+          <label class="filter" for="category-filter">图表类型
+            <select id="category-filter"><option value="">全部图表类型</option></select>
+          </label>
+        </div>
+        <div class="search-group">
+          <label class="search">
+            <span aria-hidden="true">⌕</span>
+            <input type="search" id="search" placeholder="搜索标题、摘要或图解" aria-label="搜索标题、摘要或图解">
+          </label>
+          <button type="button" id="reset-filters" disabled>清空</button>
+        </div>
+      </div>
+      <p class="count" id="count" role="status"></p>
+      <div class="grid" id="papers"></div>
+      <noscript>请启用 JavaScript 以浏览图集。</noscript>
+    </section>
+  </main>
+
+  <footer class="wrap footer"><span>论文图鉴</span><span>图源与许可见各卡片</span></footer>
+
+  <template id="paper-template">
+    <article class="paper">
+      <a class="paper-link" target="_blank" rel="noopener noreferrer">
+        <div class="figure"><img decoding="async" alt=""></div>
+        <div class="paper-body">
+          <div class="meta"><span class="venue"></span><span class="category"></span></div>
+          <h2></h2>
+          <span class="open-pdf">PDF <span aria-hidden="true">↗</span></span>
+        </div>
+      </a>
+      <dl class="paper-notes">
+        <div><dt>摘要概述</dt><dd class="abstract"></dd></div>
+        <div><dt>中文图解</dt><dd class="figure-note"></dd></div>
+      </dl>
+      <div class="credit">
+        <a class="source" target="_blank" rel="noopener noreferrer"></a>
+        <a class="license" target="_blank" rel="noopener noreferrer"></a>
+        <a class="proceedings" target="_blank" rel="noopener noreferrer">会议收录</a>
+      </div>
+    </article>
+  </template>
+</body>
+</html>
