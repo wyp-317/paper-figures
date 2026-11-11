@@ -3,6 +3,11 @@ const template = document.querySelector("#paper-template");
 const search = document.querySelector("#search");
 const count = document.querySelector("#count");
 const reset = document.querySelector("#reset-filters");
+const categoryFilter = document.querySelector("#category-filter");
+const catalog = papers.map(paper => ({
+  ...paper,
+  figures: paper.figures ?? [paper]
+}));
 const thumbnailObserver = "IntersectionObserver" in window
   ? new IntersectionObserver(entries => {
     for (const { isIntersecting, target } of entries) {
@@ -15,33 +20,70 @@ const thumbnailObserver = "IntersectionObserver" in window
     }
   }, { rootMargin: "240px 0px" })
   : null;
-const filters = [
+const paperFilters = [
   { field: "year", input: document.querySelector("#year-filter"), compare: (a, b) => b - a },
-  { field: "conference", input: document.querySelector("#conference-filter") },
-  { field: "category", input: document.querySelector("#category-filter") }
+  { field: "conference", input: document.querySelector("#conference-filter") }
 ];
 
-for (const { field, input, compare } of filters) {
-  const values = [...new Set(papers.map(paper => paper[field]))].sort(compare);
+function populateFilter(input, entries, compare) {
+  const values = [...new Set(entries)].sort(compare);
   for (const value of values) {
     input.add(new Option(String(value), String(value)));
   }
   input.addEventListener("change", render);
 }
 
+for (const { field, input, compare } of paperFilters) {
+  populateFilter(input, catalog.map(paper => paper[field]), compare);
+}
+populateFilter(categoryFilter, catalog.flatMap(paper => paper.figures.map(figure => figure.category)));
+
 function loadThumbnail(image) {
   image.src = image.dataset.thumbnail;
 }
 
-function createCard(paper, index) {
+function createCard({ paper, figures, selectedFigure }, index) {
   const card = template.content.cloneNode(true);
   const venue = [paper.conference, paper.year, paper.track].filter(Boolean).join(" ");
   const link = card.querySelector(".paper-link");
   link.href = paper.pdf;
   link.setAttribute("aria-label", paper.title + "，在新标签页打开 PDF");
   const image = card.querySelector("img");
-  image.dataset.thumbnail = "figures/" + paper.image + "-small.webp";
-  image.alt = paper.category + "，论文图 " + paper.figure;
+  const category = card.querySelector(".category");
+  const note = card.querySelector(".figure-note");
+  const source = card.querySelector(".source");
+  const license = card.querySelector(".license");
+  const controls = card.querySelector(".figure-controls");
+  const buttons = [];
+
+  function showFigure(figure) {
+    image.dataset.thumbnail = "figures/" + figure.image + "-small.webp";
+    image.alt = figure.category + "，论文图 " + figure.figure;
+    if (image.hasAttribute("src")) loadThumbnail(image);
+    category.textContent = figure.category;
+    note.textContent = figure.figureNote;
+    source.href = figure.source ?? paper.source;
+    source.textContent = paper.authors + " · 图 " + figure.figure + "（裁切自论文）";
+    const licenseCode = figure.license ?? paper.license;
+    license.href = "https://creativecommons.org/licenses/" + licenseCode + "/4.0/";
+    license.textContent = "CC " + licenseCode.toUpperCase() + " 4.0";
+    for (const [option, button] of buttons) {
+      button.setAttribute("aria-pressed", String(option === figure));
+    }
+  }
+
+  if (figures.length > 1) {
+    for (const figure of figures) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = "图 " + figure.figure + " · " + figure.category;
+      button.addEventListener("click", () => showFigure(figure));
+      buttons.push([figure, button]);
+      controls.append(button);
+    }
+    controls.hidden = false;
+  }
+  showFigure(selectedFigure);
   if (index < 2 || !thumbnailObserver) {
     image.loading = index < 2 ? "eager" : "lazy";
     loadThumbnail(image);
@@ -50,32 +92,29 @@ function createCard(paper, index) {
 
   card.querySelector("h2").textContent = paper.title;
   card.querySelector(".venue").textContent = venue;
-  card.querySelector(".category").textContent = paper.category;
   card.querySelector(".abstract").textContent = paper.abstract;
-  card.querySelector(".figure-note").textContent = paper.figureNote;
-
-  const source = card.querySelector(".source");
-  source.href = paper.source;
-  source.textContent = paper.authors + " · 图 " + paper.figure + "（裁切自论文）";
-  const license = card.querySelector(".license");
-  license.href = "https://creativecommons.org/licenses/" + paper.license + "/4.0/";
-  license.textContent = "CC " + paper.license.toUpperCase() + " 4.0";
   card.querySelector(".proceedings").href = paper.proceedings;
   return card;
 }
 
 function render() {
   const terms = search.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
-  const activeFilters = filters.filter(({ input }) => input.value);
-  const matches = papers.filter(paper => {
-    const metadata = [
-      paper.title, paper.conference, paper.track, paper.year, paper.category,
-      paper.authors, paper.abstract, paper.figureNote
-    ].join(" ").toLowerCase();
-    return activeFilters.every(({ field, input }) => String(paper[field]) === input.value)
-      && terms.every(term => metadata.includes(term));
-  });
-  reset.disabled = !search.value && activeFilters.length === 0;
+  const activeFilters = paperFilters.filter(({ input }) => input.value);
+  const category = categoryFilter.value;
+  const matches = [];
+  for (const paper of catalog) {
+    if (!activeFilters.every(({ field, input }) => String(paper[field]) === input.value)) continue;
+    const figures = paper.figures.filter(figure => !category || figure.category === category);
+    const selectedFigure = figures.find(figure => {
+      const metadata = [
+        paper.title, paper.conference, paper.track, paper.year, paper.authors, paper.abstract,
+        figure.category, figure.figureNote
+      ].join(" ").toLowerCase();
+      return terms.every(term => metadata.includes(term));
+    });
+    if (selectedFigure) matches.push({ paper, figures, selectedFigure });
+  }
+  reset.disabled = !search.value && !category && activeFilters.length === 0;
   count.textContent = matches.length === papers.length
     ? papers.length + " 篇论文"
     : matches.length + " / " + papers.length + " 篇论文";
@@ -92,7 +131,8 @@ function render() {
 search.addEventListener("input", render);
 reset.addEventListener("click", () => {
   search.value = "";
-  for (const { input } of filters) {
+  categoryFilter.value = "";
+  for (const { input } of paperFilters) {
     input.value = "";
   }
   search.focus();

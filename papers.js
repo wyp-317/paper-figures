@@ -378,12 +378,22 @@ const papers = [
     "title": "Click3R: Interactive Stereo 3D Reconstruction with Sparse Correspondence Clicks",
     "conference": "NeurIPS",
     "year": 2026,
-    "category": "任务示意图",
-    "image": "click3r",
-    "figure": 1,
     "authors": "Gu et al.",
     "abstract": "Click3R 让用户通过少量跨图像对应点修正双目三维重建。模型把点击作为几何约束，处理低重叠、重复纹理等容易让自动重建出错的场景。",
-    "figureNote": "图先给出图像对与彩色点击，再展示自动重建与加入点击后的结果。任务输入、用户反馈和输出依次排列，清楚交代交互式重建的操作方式。",
+    "figures": [
+      {
+        "category": "任务示意图",
+        "image": "click3r",
+        "figure": 1,
+        "figureNote": "图先给出图像对与彩色点击，再展示自动重建与加入点击后的结果。任务输入、用户反馈和输出依次排列，清楚交代交互式重建的操作方式。"
+      },
+      {
+        "category": "模型架构图",
+        "image": "click3r-architecture",
+        "figure": 2,
+        "figureNote": "两张输入图像用共享权重的 ViT 编码。用户点击的对应点经标记化后进入两侧的适配器，更新送往解码器的特征。图用上下对称的布局，把两路输入如何汇成三维重建结果画清楚。"
+      }
+    ],
     "source": "https://arxiv.org/abs/2611.12875v1",
     "pdf": "https://arxiv.org/pdf/2611.12875v1",
     "license": "by",
