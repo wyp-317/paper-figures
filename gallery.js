@@ -3,6 +3,16 @@ const template = document.querySelector("#paper-template");
 const search = document.querySelector("#search");
 const count = document.querySelector("#count");
 const reset = document.querySelector("#reset-filters");
+const thumbnailObserver = "IntersectionObserver" in window
+  ? new IntersectionObserver(entries => {
+    for (const { isIntersecting, target } of entries) {
+      if (isIntersecting) {
+        thumbnailObserver.unobserve(target);
+        loadThumbnail(target);
+      }
+    }
+  }, { rootMargin: "240px 0px" })
+  : null;
 const filters = [
   { field: "year", input: document.querySelector("#year-filter"), compare: (a, b) => b - a },
   { field: "conference", input: document.querySelector("#conference-filter") },
@@ -17,6 +27,12 @@ for (const { field, input, compare } of filters) {
   input.addEventListener("change", render);
 }
 
+function loadThumbnail(image) {
+  const base = image.dataset.figure;
+  image.srcset = base + "-small.webp 1x, " + base + ".webp 2x";
+  image.src = base + "-small.webp";
+}
+
 function createCard(paper, index) {
   const card = template.content.cloneNode(true);
   const venue = [paper.conference, paper.year, paper.track].filter(Boolean).join(" ");
@@ -24,9 +40,14 @@ function createCard(paper, index) {
   link.href = paper.pdf;
   link.setAttribute("aria-label", paper.title + "，在新标签页打开 PDF");
   const image = card.querySelector("img");
-  image.src = "figures/" + paper.image + ".webp";
+  image.dataset.figure = "figures/" + paper.image;
   image.alt = paper.category + "，论文图 " + paper.figure;
-  image.loading = index < 2 ? "eager" : "lazy";
+  if (index < 2 || !thumbnailObserver) {
+    image.loading = index < 2 ? "eager" : "lazy";
+    loadThumbnail(image);
+  } else {
+    thumbnailObserver.observe(image);
+  }
 
   card.querySelector("h2").textContent = paper.title;
   card.querySelector(".venue").textContent = venue;
@@ -59,6 +80,7 @@ function render() {
   count.textContent = matches.length === papers.length
     ? papers.length + " 篇论文"
     : matches.length + " / " + papers.length + " 篇论文";
+  thumbnailObserver?.disconnect();
   grid.replaceChildren(...matches.map(createCard));
   if (!matches.length) {
     const empty = document.createElement("p");

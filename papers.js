@@ -15,21 +15,6 @@ const papers = [
     "proceedings": "https://openaccess.thecvf.com/content/CVPR2026/html/Cai_Iris_Bringing_Real-World_Priors_into_Diffusion_Model_for_Monocular_Depth_CVPR_2026_paper.html"
   },
   {
-    "title": "VMonarch: Efficient Video Diffusion Transformers with Structured Attention",
-    "conference": "CVPR",
-    "year": 2026,
-    "category": "综合对比图",
-    "image": "vmonarch",
-    "figure": 1,
-    "authors": "Liang et al.",
-    "abstract": "VMonarch 用带结构的 Monarch 矩阵近似视频扩散模型中的稀疏时空注意力，并用重计算缓解近似不稳定带来的画面伪影。",
-    "figureNote": "同一张图并列展示注意力模式、计算效率和视频帧。先给出矩阵结构，再用实测指标与生成样例交代设计的实际影响。",
-    "source": "https://arxiv.org/abs/2601.22275",
-    "pdf": "https://arxiv.org/pdf/2601.22275",
-    "license": "by",
-    "proceedings": "https://openaccess.thecvf.com/content/CVPR2026/html/Liang_VMonarch_Efficient_Video_Diffusion_Transformers_with_Structured_Attention_CVPR_2026_paper.html"
-  },
-  {
     "title": "Medic-AD: Towards Medical Vision-Language Model's Clinical Intelligence",
     "conference": "CVPR",
     "year": 2026,
@@ -118,51 +103,6 @@ const papers = [
     "pdf": "https://arxiv.org/pdf/2512.06905",
     "license": "by",
     "proceedings": "https://openaccess.thecvf.com/content/CVPR2026/html/Zhou_Scaling_Zero-Shot_Reference-to-Video_Generation_CVPR_2026_paper.html"
-  },
-  {
-    "title": "Dual Band Thermal Videography: Separating Time-Varying Reflection and Emission Near Ambient Conditions",
-    "conference": "CVPR",
-    "year": 2026,
-    "category": "成像原理图",
-    "image": "dual-band-thermal",
-    "figure": 1,
-    "authors": "Narayanan et al.",
-    "abstract": "论文用双波段热成像区分物体自身发射和环境反射，结合波段间的发射率关系与随时间变化的差异，缓解近环境温度条件下的分离歧义。",
-    "figureNote": "图把相机、目标物和环境辐射源画在同一示意中，箭头区分辐射到达相机的路径。此类图适合先解释物理过程，再引出成像方程。",
-    "source": "https://arxiv.org/abs/2509.11334",
-    "pdf": "https://arxiv.org/pdf/2509.11334",
-    "license": "by",
-    "proceedings": "https://openaccess.thecvf.com/content/CVPR2026/html/Narayanan_Dual_Band_Thermal_Videography_Separating_Time-Varying_Reflection_and_Emission_Near_CVPR_2026_paper.html"
-  },
-  {
-    "title": "MultiBanana: A Challenging Benchmark for Multi-Reference Text-to-Image Generation",
-    "conference": "CVPR",
-    "year": 2026,
-    "category": "数据集构建图",
-    "image": "multibanana",
-    "figure": 2,
-    "authors": "Oshima et al.",
-    "abstract": "MultiBanana 评估模型能否从多张参考图提取主体、背景和属性，并按指令生成新图像。基准覆盖参考图数量变化、来源与尺度不一致等多参考场景。",
-    "figureNote": "四个阶段依次展示素材采集、筛选、分层分类和编辑指令生成。每阶段保留素材示例，让读者看得出输入经过哪些处理才变成评测样本。",
-    "source": "https://arxiv.org/abs/2511.22989v1",
-    "pdf": "https://arxiv.org/pdf/2511.22989",
-    "license": "by",
-    "proceedings": "https://openaccess.thecvf.com/content/CVPR2026/html/Oshima_MultiBanana_A_Challenging_Benchmark_for_Multi-Reference_Text-to-Image_Generation_CVPR_2026_paper.html"
-  },
-  {
-    "title": "Conversational Image Segmentation: Grounding Abstract Concepts with Scalable Supervision",
-    "conference": "CVPR",
-    "year": 2026,
-    "category": "数据分布对比图",
-    "image": "converseg",
-    "figure": 3,
-    "authors": "Sahoo et al.",
-    "abstract": "ConverSeg 面向带有意图、功能或物理约束的自然语言查询，要求模型给出像素级掩膜。作者构建了评测基准和自动化训练数据生成流程。",
-    "figureNote": "各数据集采用同一组概念分类。对照这些分布，可以看出以往基准偏重实体与空间关系，而 ConverSeg 的五类概念覆盖更均衡。",
-    "source": "https://arxiv.org/abs/2602.13195v1",
-    "pdf": "https://arxiv.org/pdf/2602.13195",
-    "license": "by",
-    "proceedings": "https://openaccess.thecvf.com/content/CVPR2026/html/Sahoo_Conversational_Image_Segmentation_Grounding_Abstract_Concepts_with_Scalable_Supervision_CVPR_2026_paper.html"
   },
   {
     "title": "DiG: Differential Grounding for Enhancing Fine-Grained Perception in Multimodal Large Language Models",
@@ -283,20 +223,5 @@ const papers = [
     "pdf": "https://arxiv.org/pdf/2403.13680",
     "license": "by-nc-sa",
     "proceedings": "https://ojs.aaai.org/index.php/AAAI/article/view/32635"
-  },
-  {
-    "title": "Ensemble Foreground Management for Unsupervised Object Discovery",
-    "conference": "ICCV",
-    "year": 2025,
-    "category": "定量性能曲线",
-    "abstract": "这项工作研究如何在缺少人工标注时找出图像中的物体。作者用 UnionCut 估计前景的整体范围，再训练更高效的 UnionSeg，并据此前景范围判断何时停止搜索。",
-    "figureNote": "横轴是交并比（IoU）阈值，纵轴是前景检测的 CorUnion 指标。各方法用不同颜色和点形区分，同一阈值下可以直接比较曲线高低。",
-    "image": "unioncut",
-    "figure": 4,
-    "authors": "Wu et al.",
-    "source": "https://openaccess.thecvf.com/content/ICCV2025/papers/Wu_Ensemble_Foreground_Management_for_Unsupervised_Object_Discovery_ICCV_2025_paper.pdf",
-    "pdf": "https://openaccess.thecvf.com/content/ICCV2025/papers/Wu_Ensemble_Foreground_Management_for_Unsupervised_Object_Discovery_ICCV_2025_paper.pdf",
-    "license": "by",
-    "proceedings": "https://openaccess.thecvf.com/content/ICCV2025/html/Wu_Ensemble_Foreground_Management_for_Unsupervised_Object_Discovery_ICCV_2025_paper.html"
   }
 ];
