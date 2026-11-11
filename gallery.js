@@ -6,9 +6,11 @@ const reset = document.querySelector("#reset-filters");
 const thumbnailObserver = "IntersectionObserver" in window
   ? new IntersectionObserver(entries => {
     for (const { isIntersecting, target } of entries) {
+      if (!target.isConnected) continue;
       if (isIntersecting) {
-        thumbnailObserver.unobserve(target);
-        loadThumbnail(target);
+        if (!target.hasAttribute("src")) loadThumbnail(target);
+      } else {
+        target.removeAttribute("src");
       }
     }
   }, { rootMargin: "240px 0px" })
@@ -28,9 +30,7 @@ for (const { field, input, compare } of filters) {
 }
 
 function loadThumbnail(image) {
-  const base = image.dataset.figure;
-  image.srcset = base + "-small.webp 1x, " + base + ".webp 2x";
-  image.src = base + "-small.webp";
+  image.src = image.dataset.thumbnail;
 }
 
 function createCard(paper, index) {
@@ -40,14 +40,13 @@ function createCard(paper, index) {
   link.href = paper.pdf;
   link.setAttribute("aria-label", paper.title + "，在新标签页打开 PDF");
   const image = card.querySelector("img");
-  image.dataset.figure = "figures/" + paper.image;
+  image.dataset.thumbnail = "figures/" + paper.image + "-small.webp";
   image.alt = paper.category + "，论文图 " + paper.figure;
   if (index < 2 || !thumbnailObserver) {
     image.loading = index < 2 ? "eager" : "lazy";
     loadThumbnail(image);
-  } else {
-    thumbnailObserver.observe(image);
   }
+  thumbnailObserver?.observe(image);
 
   card.querySelector("h2").textContent = paper.title;
   card.querySelector(".venue").textContent = venue;
